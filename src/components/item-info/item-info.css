@@ -1,0 +1,12 @@
+.my-card-wrapper {
+    padding: 0;
+}
+.my-card-wrapper .my-card-body {
+    height: 100%;
+    width: 100%;
+}
+.my-card-wrapper .my-card-body .my-info-card-image {
+    padding: 3rem;
+    margin: 0 auto;
+    width: 50%;
+}

@@ -1,0 +1,16 @@
+.My-Header {
+    margin: 1rem 0;
+}
+.My-Header .my-nb1 {
+    align-items: flex-end;
+    font-size: 1.2rem;
+}
+.My-Header h1 {
+    font-size: 2.4rem;
+    font-weight: bold;
+
+}
+.My-Header h1 a {
+    text-decoration: none;
+    color:whitesmoke;
+}
