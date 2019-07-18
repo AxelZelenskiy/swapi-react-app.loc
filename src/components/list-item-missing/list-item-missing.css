@@ -2,3 +2,7 @@
     text-align: center;
     margin-top: 1rem;
 }
+
+.my-card-wrapper .my-card-body .my-info-card-image {
+    width: 20%;
+}

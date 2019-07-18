@@ -5,29 +5,27 @@ import './main-section.css';
 import ItemInfo from "../item-info";
 import SwapiService from '../../services/sw-api-service';
 import PreLoading from '../pre-loading';
+import MainSectionContainer from "../main-section-container";
 
 export default class MainSection extends Component {
-    constructor() {
-        super();
-        this.getListInfo();
-    }
-
     state = {
         persons: null,
         person_info: null,
         data_loaded: false,
-        clicked: null
+        clicked: null,
+        person_image: null
     };
     swapi_service = new SwapiService();
     person_image_base_url = 'https://starwars-visualguide.com/assets/img/characters/';
-    getListInfo() {
-        const pli = this.swapi_service.getPeopleList().then((list) => {
+
+    componentDidMount() {
+        this.swapi_service.getPeopleList().then((people_list) => {
             this.setState({
-                persons: list,
+                persons: people_list,
                 data_loaded: true
-            })
+            });
         });
-    };
+    }
 
     ListClicked = (id) => {
         this.getPersonInfo(id);
@@ -45,14 +43,10 @@ export default class MainSection extends Component {
         }
     };
 
+
     render() {
-        const {data_loaded, persons, person_info , person_image} = this.state;
-        const list = data_loaded ? <Lists persons={persons} onClick={this.ListClicked}/> : < PreLoading/>;
-        return (<div className='container'>
-            <div className='row align-items-start'>
-                {list}
-                <ItemInfo person_info={person_info} image={person_image}/>
-            </div>
-        </div>);
+        const {data_loaded, persons, person_info, person_image} = this.state,
+            list = data_loaded ? <Lists persons={persons} onClick={this.ListClicked}/> : < PreLoading/>;
+        return < MainSectionContainer right_block={list} left_block={< ItemInfo person_info={person_info} image={person_image} />} />;
     }
 }

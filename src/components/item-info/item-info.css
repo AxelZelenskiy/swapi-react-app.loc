@@ -4,9 +4,9 @@
 .my-card-wrapper .my-card-body {
     height: 100%;
     width: 100%;
+    padding: 1rem;
 }
 .my-card-wrapper .my-card-body .my-info-card-image {
-    padding: 3rem;
     margin: 0 auto;
-    width: 50%;
+    width: 55%;
 }

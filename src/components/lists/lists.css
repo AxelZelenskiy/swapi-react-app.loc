@@ -1,15 +1,17 @@
 .list-col {
-    padding: 1rem;
+    padding: 0;
+    margin-bottom: .5rem;
+}
+.list-col .lists-f {
+    padding: 0;
+    margin: 0;
 }
 .lists-f .my-add-to-list-item {
-    padding: 0;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
 }
-.lists-f .my-add-to-list-item a {
-    margin: 0;
-    padding: .5rem;
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    color: #ffffff;
+.lists-f .my-add-to-list-item:hover {
+    background-color: #ff4921;
+    transition: all 1s ease-in-out;
 }

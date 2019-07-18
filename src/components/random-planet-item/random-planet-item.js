@@ -2,23 +2,30 @@ import React, {Component} from 'react';
 
 import './random-planet-item.css';
 
-export default class RandompPlanetItem extends Component {
-    getArrayOfListItems() {
-        const {planete: {name, rotation_period, population, gravity}} = this.props;
-        let result = [], work_array = [];
-        work_array.push({'name': name});
-        work_array.push({'rotationPeriod': rotation_period});
-        work_array.push({'population': population});
-        work_array.push({'gravity': gravity});
-        work_array.forEach((element) => {
-            let obj_key = Object.keys(element).shift(),
-                li_key = 'lgik' + Date.now() + obj_key,
-                new_element = <li className='list-group-item'
-                                  key={li_key}> {obj_key.toUpperCase()} : {Object.values(element)}</li>;
-            result.push(new_element);
-        });
-        return result;
+export default class RandomPlanetItem extends Component {
 
+    capitalize = (some_string) => {
+        if (typeof some_string !== 'string') return '';
+        return some_string.charAt(0).toUpperCase() + some_string.slice(1)
+    };
+
+    clear_subs = (some_string) => {
+        if (typeof some_string !== 'string') return '';
+        return some_string.replace(/(_)/g,' ');
+    };
+
+    getArrayOfListItems() {
+        //planet is object - not array
+        const { planet } = this.props;
+        const sorted_planet = Object.entries(planet).filter(([key]) => {
+            const defaults = ['name', 'rotation_period', 'population', 'gravity'];
+            return defaults.includes(key);
+        });
+        return sorted_planet.map(([key, value]) => {
+            const li_key = 'lgik' + Date.now() + key;
+            key = this.clear_subs(key);
+            return <li className='list-group-item' key={li_key}> {this.capitalize(key)} : {value}</li>;
+        });
     };
 
     render() {

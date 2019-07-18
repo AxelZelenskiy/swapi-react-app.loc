@@ -1,38 +1,39 @@
 import React, {Component} from 'react';
 
 import './lists.css';
+import PreLoading from "../pre-loading";
+import ListsContainer from "../lists-container";
 
 export default class Lists extends Component {
+    state = {
+        persons_list: null
+    };
+
     getId(val) {
         const re = /\/(\d*)\/$/;
         let result = val.match(re);
         return result[result.length - 1];
-    };
+    }
 
-    genList() {
-        const {persons, onClick} = this.props;
-        let work_set_of_persons = [];
-        persons.forEach(person => {
-            let id = this.getId(person.url),
-                key = person.name + id + 'key';
-            let new_element = <li className='list-group-item my-add-to-list-item' id={id} key={key} onClick={() => {
-                onClick(id);
-            }}>
-                <a className='link-add' href="#">{person.name}</a>
-            </li>;
-            work_set_of_persons.push(new_element);
+    componentDidMount() {
+        const {persons, onClick} = this.props,
+            list = persons.map((person) => {
+                const id = this.getId(person.url),
+                    key = person.name + id + 'key';
+                return <li className='list-group-item my-add-to-list-item' id={id} key={key} onClick={() => {
+                    onClick(id);
+                }}>
+                    {person.name}
+                </li>;
+            });
+        this.setState({
+            persons_list: list
         });
-        return work_set_of_persons;
-    };
+    }
 
     render() {
-        const persons_list = this.genList();
-        return (
-            <div className="col-5 jumbotron list-col">
-                <ul className='list-group lists-f'>
-                    {persons_list}
-                </ul>
-            </div>
-        )
+        const {persons_list} = this.state;
+        if (persons_list) { return <ListsContainer content={persons_list} /> }
+        return <PreLoading/>;
     }
 }
